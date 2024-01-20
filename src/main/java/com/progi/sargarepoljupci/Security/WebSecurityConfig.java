@@ -50,6 +50,7 @@ public class WebSecurityConfig {
             "/api/registration/**",
             "/api/authenticate/**",
             "/parkingLots",
+            "/parkingLot/**",
             "/bicycle-spots/for-parking/{parkingId}",
             "/parking-spots/for-parking/{parkingId}",
             "/all-bicycle-spots",

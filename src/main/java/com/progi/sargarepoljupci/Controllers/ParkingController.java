@@ -56,7 +56,7 @@ public class ParkingController {
         return ResponseEntity.ok(availability);
     }
 
-    @GetMapping("/accessibleParkingSpots")
+    @GetMapping("/parking/accessibleParkingSpots")
     public List<ParkingSpotResponse> findAccessibleParkingSpots() {
         List<ParkingSpot> parkingSpots = parkingSpotService.findParkingSpotsByParkingIsNotNull();
         List<ParkingSpotResponse> parkingSpotRequests = new ArrayList<>();
@@ -66,7 +66,7 @@ public class ParkingController {
         }
         return parkingSpotRequests;
     }
-    @GetMapping("/accessibleBicycleSpots")
+    @GetMapping("/parking/accessibleBicycleSpots")
     public List<BicycleParkingResponse> findAccessibleBicycleSpots() {
         List<BicycleParking> parkingSpots = bicycleService.findByParkingLotIsNotNull();
         List<BicycleParkingResponse> parkingSpotRequests = new ArrayList<>();
@@ -77,7 +77,7 @@ public class ParkingController {
         return parkingSpotRequests;
     }
 
-    @GetMapping("/unmarkedParkingSpots")
+    @GetMapping("/parking/unmarkedParkingSpots")
     public List<ParkingSpotResponse> findUnmarkedParkingSpots() {
         List<ParkingSpot> parkingSpots = parkingSpotService.findParkingSpotsByParkingIsNull();
         List<ParkingSpotResponse> parkingSpotRequests = new ArrayList<>();
@@ -112,7 +112,7 @@ public class ParkingController {
 
     @GetMapping("/occupied")
     public List<ParkingSpotResponse> getOccupiedParkingSpots() {
-        List<ParkingSpot> parkingSpots = reservationService.findReservedParkingSpotsForTimeSlot(LocalDateTime.now(), LocalDateTime.now());
+        List<ParkingSpot> parkingSpots = reservationService.findReservedParkingSpotsForTimeSlot(LocalDateTime.now(), LocalDateTime.now().plusSeconds(4));
         List<ParkingSpotResponse> parkingSpotRequests = new ArrayList<>();
 
         for (ParkingSpot parkingSpot : parkingSpots) {
@@ -125,7 +125,7 @@ public class ParkingController {
     // Endpoint to get unoccupied parking spots
     @GetMapping("/unoccupied")
     public List<ParkingSpotResponse> getUnoccupiedParkingSpots() {
-        List<ParkingSpot> parkingSpots = reservationService.findAvailableParkingSpotsForTimeSlot(LocalDateTime.now(), LocalDateTime.now());
+        List<ParkingSpot> parkingSpots = reservationService.findAvailableParkingSpotsForTimeSlot(LocalDateTime.now(), LocalDateTime.now().plusSeconds(4));
         List<ParkingSpotResponse> parkingSpotRequests = new ArrayList<>();
 
         for (ParkingSpot parkingSpot : parkingSpots) {
