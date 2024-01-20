@@ -35,7 +35,7 @@ public class ParkingSpotService {
 //        return false;
 //    }
     public boolean getParkingSpotAvailability(String parkingSpotId) {
-        return reservationService.canParkingSpotBeReserved(parkingSpotId, LocalDateTime.now(), LocalDateTime.now());
+        return reservationService.canParkingSpotBeReserved(parkingSpotId, LocalDateTime.now(), LocalDateTime.now().plusSeconds(4));
 
     }
 
